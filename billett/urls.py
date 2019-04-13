@@ -15,10 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-
+from reservation.views import liste
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     # path('webapi/', include('rest_framework.urls')), # unsure what this does. 
-    path('api/', include('reservasjon.urls')),
+    path('api/', include('reservation.urls')),
+    path('reservasjoner/', liste)
 ]

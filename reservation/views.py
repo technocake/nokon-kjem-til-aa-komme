@@ -1,15 +1,21 @@
 from django.shortcuts import render
 from rest_framework import viewsets
-from . import serializers
-
+from django.http import HttpResponse
 from django.contrib.auth.models import User
-from .models import Production, Performance, Reservation, Person
+
+from . import serializers
+from .models import Theatre, Production, Performance, Reservation, \
+    Person, TicketType, Ticket
 
 
-# ViewSets define the view behavior.
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = serializers.UserSerializer
+
+
+class TheatreViewSet(viewsets.ModelViewSet):
+    queryset = Theatre.objects.all()
+    serializer_class = serializers.TheatreSerializer
 
 
 class ProductionViewSet(viewsets.ModelViewSet):
@@ -30,3 +36,19 @@ class ReservationViewSet(viewsets.ModelViewSet):
 class PersonViewSet(viewsets.ModelViewSet):
     queryset = Person.objects.all()
     serializer_class = serializers.PersonSerializer
+
+
+class TicketViewSet(viewsets.ModelViewSet):
+    queryset = Ticket.objects.all()
+    serializer_class = serializers.TicketSerializer
+
+
+class TicketTypeViewSet(viewsets.ModelViewSet):
+    queryset = TicketType.objects.all()
+    serializer_class = serializers.TicketTypeSerializer
+
+
+def liste(request):
+    reservasjoner = Reservation.objects.filter(performance=2)
+
+    return HttpResponse(reservasjoner)
