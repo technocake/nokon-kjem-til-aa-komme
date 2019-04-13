@@ -1,0 +1,16 @@
+version: '3.7'
+
+services:
+    django:
+        image: technocake/nokon-kjem-til-aa-komme:prototype
+        ports:
+          - "8000:8000"
+        networks:
+          - billettnett
+        deploy:
+          mode: replicated
+          replicas: 1
+
+networks:
+  billettnett:
+    driver: overlay
