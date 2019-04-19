@@ -2,6 +2,7 @@ from django.shortcuts import render
 from rest_framework import viewsets
 from django.http import HttpResponse
 from django.contrib.auth.models import User
+from . import forms
 
 from . import serializers
 from .models import Theatre, Production, Performance, Reservation, \
@@ -49,6 +50,8 @@ class TicketTypeViewSet(viewsets.ModelViewSet):
 
 
 def liste(request):
-    reservasjoner = Reservation.objects.filter(performance=2)
+    reservations = Reservation.objects.all()
 
-    return HttpResponse(reservasjoner)
+    return render(request, 'index.html', {
+        'reservations': reservations,
+        'form': forms.ReservationForm()})
