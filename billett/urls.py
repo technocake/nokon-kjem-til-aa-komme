@@ -17,6 +17,9 @@ from django.contrib import admin
 from django.urls import path, include
 from reservation.views import liste
 
+# Setting the title in the admin panel
+admin.site.site_header = 'Bak Scenen'
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     # path('webapi/', include('rest_framework.urls')), # unsure what this does. 
